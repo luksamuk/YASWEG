@@ -1,0 +1,194 @@
+.panel-footer {
+
+    background-color: #4d8ecf;
+    outline-color: #4d8ecf;
+}
+
+.panel-footer .container {
+    margin-top:auto;
+    margin-bottom:auto;
+    display:block;
+    align-content: center;
+}
+
+.panel-footer .container p {
+    text-align: center;
+    margin: auto;
+    color: #fff;
+}
+
+html, body {
+    height: 100%;
+}
+
+.nav a {
+    color: #5a5a5a;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 14px 10px;
+    text-transform: uppercase;
+}
+
+.nav li {
+  display: inline;
+}
+
+.jumbotron {
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(120deg, #155799, #159957);
+    padding-bottom: 100px;
+}
+
+.jumbotron a {
+    color: #fff;
+}
+
+.jumbotron .container {
+    height: auto;
+    padding-bottom:auto;
+}
+
+.jumbotron h1 {
+    color: #fff;
+    font-size: 7.5rem;
+    font-weight: bold;
+}
+
+.jumbotron p {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.jumbotron .centerobj {
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    display:block;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 1rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+    color: #ffffff;
+}
+
+/* Normal buttons */
+.btn-outline-primary {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+    color: #ffffff;
+    font-size: 1.7rem;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.open > .dropdown-toggle.btn-outline-primary {
+    background: #33a6cc;
+    color: #ffffff;
+}
+
+.btn-outline-primary:active,
+.btn-outline-primary.active {
+    background: #007299;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+/* Buttons for white background */
+.light-block .btn-outline-primary {
+    background-color: transparent;
+    transition: all .5s;
+    color: #159957;
+    border-color: #159957;
+    font-size: 1.7rem;
+}
+
+.light-block .btn-outline-primary:hover,
+.light-block .btn-outline-primary:focus,
+.light-block .btn-outline-primary:active,
+.light-block .btn-outline-primary.active,
+.open > .light-block .dropdown-toggle.btn-outline-primary {
+    background: #33a6cc;
+    color: #ffffff;
+    border-color: #33a6cc;
+}
+
+.light-block .btn-outline-primary:active,
+.light-block .btn-outline-primary.active {
+    background: #007299;
+    color: #159957;
+    box-shadow: none;
+}
+
+
+
+
+.basic-info h3 {
+    font-size: 7rem;
+}
+
+.basic-info h4 {
+    margin-top: 50px;
+    font-size: 5rem;
+}
+
+.basic-info h5 {
+    margin-top: 50px;
+    font-size: 2.7rem;
+}
+
+.basic-info p {
+    margin-top: 20px;
+    font-size: 2.5rem;
+}
+
+.basic-info .light-block .row,
+.basic-info .bold-block .row {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-left:10%;
+    margin-right: 10%;
+}
+
+.basic-info .bold-block {
+    background-image: linear-gradient(60deg, #159957, #155799);
+}
+
+.basic-info
+.light-block h3,
+.basic-info .light-block h4 {
+    color: #159957;
+}
+
+.basic-info .light-block p,
+.basic-info .light-block h5 {
+    color: #606c71;
+}
+
+.basic-info .bold-block h3,
+.basic-info .bold-block h4,
+.basic-info .bold-block h5 {
+    color: white;
+}
+
+.basic-info .bold-block p {
+    color: #cdcdcd;
+}
+
+.basic-info a {
+    color: #dedede;
+    font-weight: bold;
+}
