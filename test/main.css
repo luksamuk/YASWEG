@@ -167,8 +167,8 @@ html, body {
     background-image: linear-gradient(60deg, #159957, #155799);
 }
 
-.basic-info
-.light-block h3,
+.basic-info .light-block h2,
+.basic-info .light-block h3,
 .basic-info .light-block h4 {
     color: #159957;
 }
@@ -178,6 +178,7 @@ html, body {
     color: #606c71;
 }
 
+.basic-info .bold-block h2,
 .basic-info .bold-block h3,
 .basic-info .bold-block h4,
 .basic-info .bold-block h5 {

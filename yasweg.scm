@@ -1,5 +1,23 @@
-;;(define-module (yasweg generator)
-;;  #:export ())
+(define-module (yasweg generator))
+(export yasweg-open
+        yasweg-close
+        yasweg-on-page
+        yasweg-link-css
+        yasweg-on-head
+        yasweg-on-body
+        yasweg-h
+        yasweg-p
+        yasweg-on-div
+        yasweg-on-divclass
+        yasweg-img
+        yasweg-newline
+        yasweg-set-metadata
+        yasweg-on-navbar
+        yasweg-list
+        yasweg-on-container
+        yasweg-on-ribbon
+        yasweg-on-footer
+        yasweg-button)
 
 (use-modules ((ice-9 format)))
 
@@ -121,8 +139,58 @@
            body ...
            (display "</div>\n" *stahtml-file*))))))
 
+(define-syntax yasweg-img
+  (syntax-rules ()
+    ((yasweg-img img-src)
+     (if *stahtml-file*
+         (display (format #f "<img src=\"~a\"/>\n"
+                          img-src)
+                  *stahtml-file*)))
+    ((yasweg-img class img-src)
+     (if *stahtml-file*
+         (display (format #f "<img class=\"~a\" src=\"~a\"/>"
+                          class img-src)
+                  *stahtml-file*)))))
+
+(define-syntax yasweg-newline
+  (syntax-rules ()
+    ((yasweg-newline)
+     (if *stahtml-file* (display "<br/>\n" *stahtml-file*)))))
+         
+
 ;; ================== Basic inline formatting macros ==========
 
+;; TO-DO
+
+;; ================== Metadata macros =========================
+
+(define yasweg-set-metadata
+  (λ (metadata-list)
+    (if *stahtml-file*
+        (map (λ (item)
+               (if (list? item)
+                   (cond
+                    ;; Define charset
+                    ((eq? (car item) 'charset)
+                     (display (format #f "<meta charset=\"~a\">\n"
+                                      (cadr item))
+                              *stahtml-file*))
+                    ;; Define author
+                    ((eq? (car item) 'author)
+                     (display (format #f "<meta name=\"author\" content=\"~a\">\n"
+                                      (cadr item))
+                              *stahtml-file*))
+                    ;; Define description
+                    ((eq? (car item) 'description)
+                     (display (format #f "<meta name=\"description\" content=\"~a\">\n"
+                                      (cadr item))
+                              *stahtml-file*))
+                    ;; Define title
+                    ((eq? (car item) 'title)
+                     (display (format #f "<title>~a</title>\n"
+                                      (cadr item))
+                              *stahtml-file*)))))
+             metadata-list))))
 
 
 ;; ===================== Bootstrap support ====================
@@ -160,29 +228,51 @@
                 list)
            ;; Close list
            (display "</ul>\n" *stahtml-file*))))))
-                        
 
+(define-syntax yasweg-on-container
+  (syntax-rules ()
+    ((yasweg-on-container body ...)
+     (yasweg-on-divclass "container" body ...))))
 
+(define-syntax yasweg-on-ribbon
+  (syntax-rules ()
+    ((yasweg-on-jumbotron body ...)
+     (yasweg-on-divclass
+      "jumbotron"
+      (yasweg-on-container
+       body ...)))))
 
-;; ==================== Debugging and testing =================
+(define-syntax yasweg-on-footer
+  (syntax-rules ()
+    ((yasweg-on-footer body ...)
+     (yasweg-on-divclass
+      "panel-footer"
+      (yasweg-on-container
+       body ...)))))
 
-
-(define generate-test-page
-  (λ ()
-    (yasweg-on-page
-     "test.html"
-     (yasweg-on-head
-      (yasweg-link-css "main.css"))
-     (yasweg-on-body
-      (yasweg-on-navbar
-       (yasweg-on-divclass
-        "container"
-        (yasweg-list 'pull-left
-                     '(("Back to Parent" . "#about")))
-        (yasweg-list 'pull-right
-                     '((About . about)))))
-      (yasweg-on-div
-       (yasweg-h 1 "My First Webpage")
-       (yasweg-p "This webpage was generated using YASWEG."))
-      )
-     )))
+(define-syntax yasweg-button
+  (syntax-rules ()
+    ((yasweg-button type text)
+     (yasweg-button type "" "" text))
+    ((yasweg-button type ref text)
+     (yasweg-button type ref "" text))
+    ((yasweg-button type ref class text)
+     (if *stahtml-file*
+         (begin
+           (display (format #f "<a href=\"~a\" type=\"button\" class=\"~a\">~a</a>\n"
+                            ;; 1. href
+                            ref
+                            ;; 2. class (and type)
+                            (format #f "~a~a"
+                                    (if (not (string=? class ""))
+                                        (format #f "~a " class)
+                                        "")
+                                    (cond
+                                     ((eq? type 'outline-primary) "btn-outline-primary")
+                                     ((eq? type 'outline-secondary) "btn-outline-secondary")
+                                     ((eq? type 'primary) "btn-primary")
+                                     ((eq? type 'secondary) "btn-secondary")
+                                     (#t "btn-primary")))
+                            ;; 3. text
+                            text)
+                    *stahtml-file*))))))
