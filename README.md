@@ -18,7 +18,7 @@ Inside is a single test example, being used to help create the project.
 LICENSE
 -------
 
-The MIT License. See LICENSE for details.
+The LGPL v3 License. See LICENSE for details.
 
 Copyright 2017 Lucas Vieira.
 
