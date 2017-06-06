@@ -13,7 +13,7 @@
         yasweg-newline
         yasweg-set-metadata
         yasweg-on-navbar
-        yasweg-list
+        yasweg-ulist
         yasweg-on-container
         yasweg-on-ribbon
         yasweg-on-footer
@@ -113,10 +113,15 @@
 (define-syntax yasweg-p
   (syntax-rules ()
     ((yasweg-p text)
+     (yasweg-p #f text))
+    ((yasweg-p class text)
      (if *stahtml-file*
          (begin
            (display
-            (format #f "<p>~a</p>\n" text)
+            (if class
+                (format #f "<p class=\"~a\">~a</p>\n"
+                        class text)
+                (format #f "<p>~a</p>\n" text))
             *stahtml-file*))))))
 
 (define-syntax yasweg-on-div
@@ -202,7 +207,7 @@
       "nav"
       body ...))))
 
-(define-syntax yasweg-list
+(define-syntax yasweg-ulist
   (syntax-rules ()
     ((yasweg-list class list)
      (if *stahtml-file*

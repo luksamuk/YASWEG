@@ -14,10 +14,10 @@
   ;; Navigation
   (yasweg-on-navbar
    (yasweg-on-container
-    (yasweg-list 'pull-left
-                 '(("Back to Parent" . "#about")))
-    (yasweg-list 'pull-right
-                 '((About . about)))))
+    (yasweg-ulist 'pull-left
+                  '(("Back to Parent" . "#about")))
+    (yasweg-ulist 'pull-right
+                  '((About . about)))))
 
   ;; Big Ribbon
   (yasweg-on-ribbon
@@ -41,6 +41,7 @@
   ;; Footer
   (yasweg-on-footer
    (yasweg-p
+    "text-muted"
     "Copyright blablabla"))))
 
 (format #t "YASWEG TEST: Test file successfully compiled.\n")
