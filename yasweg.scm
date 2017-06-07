@@ -18,7 +18,9 @@
         yasweg-on-ribbon
         yasweg-on-footer
         yasweg-button
-        yasweg-inline-link)
+        yasweg-inline-link
+        yasweg-on-row
+        yasweg-on-col)
 
 (use-modules ((ice-9 format)))
 
@@ -299,3 +301,39 @@
                             ;; 3. text
                             text)
                     *stahtml-file*))))))
+
+(define-syntax yasweg-on-row
+  (syntax-rules ()
+    ((yasweg-on-row body ...)
+     (if *stahtml-file*
+         (yasweg-on-divclass
+          "row"
+          body ...)))))
+
+;;(yasweg-on-col '((xs 12) (md 6)) )
+
+(define-syntax yasweg-on-col
+  (syntax-rules ()
+    ((yasweg-on-col target-list body ...)
+     (if (not (list? target-list))
+         (error "Columns must be specified by a list of lists")
+         (begin
+           (let ((class-string ""))
+             (map (λ (target)
+                    (cond
+                     ((not (list? target))
+                      (error "Columns must be specified by a list of lists"))
+                     ((or (not (number? (cadr target)))
+                          (< (cadr target) 1)
+                          (> (cadr target) 12))
+                      (error "Column size must be a number between 1 and 12"))
+                     (#t (set! class-string (string-append class-string
+                                                           (format #f "col-~a-~a "
+                                                                   (car target)
+                                                                   (cadr target)))))))
+                  target-list)
+             (if *stahtml-file*
+                 (yasweg-on-divclass
+                  class-string
+                  body ...))))))))
+     

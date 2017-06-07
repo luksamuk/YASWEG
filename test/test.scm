@@ -28,19 +28,29 @@
                                  'blank))
    (yasweg-button 'outline-primary "Oh please press me"))
 
-  (yasweg-on-divclass "basic-info"
-                      (yasweg-on-divclass "light-block"
-                                          (yasweg-h 3 "Light Block.")
-                                          (yasweg-p "Testing.")
-                                          (yasweg-newline)
-                                          (yasweg-img 'centerobj "img/lena.jpg")
-                                          (yasweg-newline)
-                                          (yasweg-button 'outline-primary "Press me"))
-                      
-                      (yasweg-on-divclass "bold-block"
-                                          (yasweg-h 3 "Bold block.")
-                                          (yasweg-p "Testing again.")
-                                          (yasweg-button 'outline-primary "Press me")))
+  (yasweg-on-divclass
+   "basic-info"
+   (yasweg-on-divclass
+    "light-block"
+    (yasweg-on-row
+     (yasweg-on-col '((md 6))
+                    (yasweg-h 3 "Light Block.")
+                    (yasweg-p "Testing.")
+                    (yasweg-newline)
+                    (yasweg-button 'outline-primary "#" "centerobj" "Press me"))
+     
+     (yasweg-on-col '((md 6))
+                    (yasweg-img 'centerobj "img/lena.jpg"))))
+   
+   (yasweg-on-divclass
+    "bold-block"
+    (yasweg-on-row
+     (yasweg-on-col '((md 6))
+                    (yasweg-img 'centerobj "img/lena.jpg"))
+     (yasweg-on-col '((md 6))
+                    (yasweg-h 3 "Bold block.")
+                    (yasweg-p "Testing again.")
+                    (yasweg-button 'outline-primary "Press me")))))
 
   ;; Footer
   (yasweg-on-footer
