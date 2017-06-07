@@ -17,7 +17,8 @@
         yasweg-on-container
         yasweg-on-ribbon
         yasweg-on-footer
-        yasweg-button)
+        yasweg-button
+        yasweg-inline-link)
 
 (use-modules ((ice-9 format)))
 
@@ -165,7 +166,24 @@
 
 ;; ================== Basic inline formatting macros ==========
 
-;; TO-DO
+(define-syntax yasweg-inline-link
+  (syntax-rules ()
+    ((yasweg-inline-link link)
+     (yasweg-inline-link link link))
+    ((yasweg-inline-link link text)
+     (if *stahtml-file*
+         (format #f "<a href=\"~a\">~a</a>" link text)))
+    ((yasweg-inline-link link text target)
+     (if *stahtml-file*
+         (format #f "<a href=\"~a\" target=\"~a\">~a</a>"
+                 link
+                 (cond
+                  ((eq? target 'blank) "_blank")
+                  ((eq? target 'self) "_self")
+                  ((eq? target 'parent) "_parent")
+                  ((eq? target 'top) "_top")
+                  (#t target))
+                 text)))))
 
 ;; ================== Metadata macros =========================
 
@@ -264,7 +282,7 @@
     ((yasweg-button type ref class text)
      (if *stahtml-file*
          (begin
-           (display (format #f "<a href=\"~a\" type=\"button\" class=\"~a\">~a</a>\n"
+           (display (format #f "<a href=\"~a\" type=\"button\" class=\"btn ~a\">~a</a>\n"
                             ;; 1. href
                             ref
                             ;; 2. class (and type)

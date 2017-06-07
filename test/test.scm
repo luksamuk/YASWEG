@@ -22,7 +22,11 @@
   ;; Big Ribbon
   (yasweg-on-ribbon
    (yasweg-h 1 "My First Webpage")
-   (yasweg-p "This webpage was generated using YASWEG."))
+   (yasweg-p "This webpage was generated using YASWEG.")
+   (yasweg-p (yasweg-inline-link "about:blank"
+                                 "This is a test link that directs you to nothing."
+                                 'blank))
+   (yasweg-button 'outline-primary "Oh please press me"))
 
   (yasweg-on-divclass "basic-info"
                       (yasweg-on-divclass "light-block"
