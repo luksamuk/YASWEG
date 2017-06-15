@@ -83,8 +83,9 @@
            ;; Start header
            (display "<head>\n" *stahtml-file*)
            ;; Include boostrap
-           (link-css
-            "https://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css")
+           (if (file-exists? "bootstrap.css")
+               (link-css "bootstrap.css")
+               (warn "File \"bootstrap.css\" not found, ignoring bootstrap support"))
            ;; Push other arguments
            body ...
            ;; Close header
